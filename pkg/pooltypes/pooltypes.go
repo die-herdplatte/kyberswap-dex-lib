@@ -88,6 +88,7 @@ import (
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/curve"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/dmm"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/dystopia"
+	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/ekubo"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/elastic"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/equalizer"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/source/fraxswap"
@@ -281,6 +282,7 @@ type Types struct {
 	UniswapV4                  string
 	OvernightUsdp              string
 	SkyPSM                     string
+	Ekubo                      string
 }
 
 var (
@@ -431,5 +433,6 @@ var (
 		UniswapV4:                  uniswapv4.DexType,
 		OvernightUsdp:              overnightusdp.DexType,
 		SkyPSM:                     skypsm.DexType,
+		Ekubo:                      ekubo.DexType,
 	}
 )
