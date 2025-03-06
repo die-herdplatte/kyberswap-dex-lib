@@ -43,6 +43,7 @@ import (
 	gyro3clp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/gyroscope/3clp"
 	gyroeclp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/gyroscope/eclp"
 	hashflowv3 "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/hashflow-v3"
+	honey "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/honey"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/integral"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/kelp/rseth"
 	kyberpmm "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/kyber-pmm"
@@ -58,6 +59,7 @@ import (
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/nomiswap"
 	ondousdy "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/ondo-usdy"
 	overnightusdp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/overnight-usdp"
+	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/pandafun"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/primeeth"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/puffer/pufeth"
 	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/renzo/ezeth"
@@ -283,6 +285,8 @@ type Types struct {
 	OvernightUsdp              string
 	SkyPSM                     string
 	Ekubo                      string
+	Honey                      string
+	PandaFun                   string
 }
 
 var (
@@ -434,5 +438,7 @@ var (
 		OvernightUsdp:              overnightusdp.DexType,
 		SkyPSM:                     skypsm.DexType,
 		Ekubo:                      ekubo.DexType,
+		Honey:                      honey.DexType,
+		PandaFun:                   pandafun.DexType,
 	}
 )

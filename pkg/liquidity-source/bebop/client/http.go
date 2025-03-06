@@ -4,12 +4,12 @@ import (
 	"context"
 	"errors"
 
-	"github.com/KyberNetwork/logger"
+	"github.com/KyberNetwork/kutils/klog"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/go-resty/resty/v2"
-	"github.com/goccy/go-json"
 
-	bebop "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/bebop"
+	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/bebop"
+	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/util"
 )
 
 const (
@@ -57,7 +57,8 @@ func NewHTTPClient(config *bebop.HTTPClientConfig) *HTTPClient {
 	}
 }
 
-func (c *HTTPClient) QuoteSingleOrderResult(ctx context.Context, params bebop.QuoteParams) (bebop.QuoteSingleOrderResult, error) {
+func (c *HTTPClient) QuoteSingleOrderResult(ctx context.Context,
+	params bebop.QuoteParams) (bebop.QuoteSingleOrderResult, error) {
 	// token address case-sensitive
 	req := c.client.R().
 		SetContext(ctx).
@@ -80,18 +81,19 @@ func (c *HTTPClient) QuoteSingleOrderResult(ctx context.Context, params bebop.Qu
 		return bebop.QuoteSingleOrderResult{}, err
 	}
 
-	respBytes := resp.Body()
-	_ = json.Unmarshal(respBytes, &result)
-	_ = json.Unmarshal(respBytes, &fail)
-
 	if !resp.IsSuccess() || fail.Failed() {
-		return bebop.QuoteSingleOrderResult{}, parseRFQError(fail.Error.ErrorCode, fail.Error.Message)
+		klog.WithFields(ctx, klog.Fields{
+			"rfq.client": bebop.DexType,
+			"rfq.resp":   util.MaxBytesToString(resp.Body(), 256),
+			"rfq.status": resp.StatusCode(),
+		}).Error("quote failed")
+		return bebop.QuoteSingleOrderResult{}, parseRFQError(fail.Error.ErrorCode)
 	}
 
 	return result, nil
 }
 
-func parseRFQError(errorCode int, message string) error {
+func parseRFQError(errorCode int) error {
 	switch errorCode {
 	case errCodeBadRequest:
 		return ErrRFQBadRequest
@@ -108,9 +110,6 @@ func parseRFQError(errorCode int, message string) error {
 	case errCodeUnexpectedPermitsError:
 		return ErrRFQUnexpectedPermitsError
 	default:
-		logger.
-			WithFields(logger.Fields{"client": "bebop", "errorCode": errorCode, "message": message}).
-			Error("rfq failed")
 		return ErrRFQFailed
 	}
 }

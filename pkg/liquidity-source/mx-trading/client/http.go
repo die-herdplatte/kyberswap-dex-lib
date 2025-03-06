@@ -4,10 +4,11 @@ import (
 	"context"
 	"errors"
 
-	"github.com/KyberNetwork/logger"
+	"github.com/KyberNetwork/kutils/klog"
+	"github.com/go-resty/resty/v2"
 
 	mxtrading "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/mx-trading"
-	"github.com/go-resty/resty/v2"
+	"github.com/KyberNetwork/kyberswap-dex-lib/pkg/util"
 )
 
 const (
@@ -43,27 +44,29 @@ func (c HTTPClient) Quote(ctx context.Context, params mxtrading.OrderParams) (mx
 	req := c.client.R().SetContext(ctx).SetBody(params)
 
 	var result mxtrading.SignedOrderResult
-	var errResult any
+	var errResult string
 	resp, err := req.SetResult(&result).SetError(&errResult).Post(orderEndpoint)
 	if err != nil {
 		return mxtrading.SignedOrderResult{}, err
 	}
 
 	if !resp.IsSuccess() {
+		klog.WithFields(ctx, klog.Fields{
+			"rfq.client": mxtrading.DexType,
+			"rfq.resp":   util.MaxBytesToString(resp.Body(), 256),
+			"rfq.status": resp.StatusCode(),
+		}).Error("quote failed")
 		return mxtrading.SignedOrderResult{}, parseOrderError(errResult)
 	}
 
 	return result, nil
 }
 
-func parseOrderError(errResult any) error {
-	logger.Errorf("mx-trading rfq error: %v", errResult)
-
+func parseOrderError(errResult string) error {
 	switch errResult {
 	case errMsgOrderIsTooSmall:
 		return ErrOrderIsTooSmall
 	default:
-		logger.WithFields(logger.Fields{"body": errResult}).Errorf("unknown mx-trading rfq error")
 		return ErrRFQFailed
 	}
 }

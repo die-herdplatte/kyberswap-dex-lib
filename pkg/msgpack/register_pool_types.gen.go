@@ -47,6 +47,7 @@ import (
 	pkg_liquiditysource_gyroscope_3clp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/gyroscope/3clp"
 	pkg_liquiditysource_gyroscope_eclp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/gyroscope/eclp"
 	pkg_liquiditysource_hashflowv3 "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/hashflow-v3"
+	pkg_liquiditysource_honey "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/honey"
 	pkg_liquiditysource_integral "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/integral"
 	pkg_liquiditysource_kelp_rseth "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/kelp/rseth"
 	pkg_liquiditysource_kyberpmm "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/kyber-pmm"
@@ -61,6 +62,7 @@ import (
 	pkg_liquiditysource_nomiswap_nomiswapstable "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/nomiswap/nomiswapstable"
 	pkg_liquiditysource_ondousdy "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/ondo-usdy"
 	pkg_liquiditysource_overnightusdp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/overnight-usdp"
+	pkg_liquiditysource_pandafun "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/pandafun"
 	pkg_liquiditysource_primeeth "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/primeeth"
 	pkg_liquiditysource_puffer_pufeth "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/puffer/pufeth"
 	pkg_liquiditysource_renzo_ezeth "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/renzo/ezeth"
@@ -76,6 +78,7 @@ import (
 	pkg_liquiditysource_syncswapv2_stable "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/syncswapv2/stable"
 	pkg_liquiditysource_uniswapv1 "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/uniswap-v1"
 	pkg_liquiditysource_uniswapv2 "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/uniswap-v2"
+	pkg_liquiditysource_uniswapv4 "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/uniswap-v4"
 	pkg_liquiditysource_usd0pp "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/usd0pp"
 	pkg_liquiditysource_velocorev2_cpmm "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/velocore-v2/cpmm"
 	pkg_liquiditysource_velocorev2_wombatstable "github.com/KyberNetwork/kyberswap-dex-lib/pkg/liquidity-source/velocore-v2/wombat-stable"
@@ -179,6 +182,7 @@ func init() {
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_gyroscope_3clp.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_gyroscope_eclp.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_hashflowv3.PoolSimulator{})
+	msgpack.RegisterConcreteType(&pkg_liquiditysource_honey.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_integral.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_kelp_rseth.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_kyberpmm.PoolSimulator{})
@@ -193,6 +197,7 @@ func init() {
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_nomiswap_nomiswapstable.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_ondousdy.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_overnightusdp.PoolSimulator{})
+	msgpack.RegisterConcreteType(&pkg_liquiditysource_pandafun.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_primeeth.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_puffer_pufeth.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_renzo_ezeth.PoolSimulator{})
@@ -208,6 +213,7 @@ func init() {
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_syncswapv2_stable.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_uniswapv1.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_uniswapv2.PoolSimulator{})
+	msgpack.RegisterConcreteType(&pkg_liquiditysource_uniswapv4.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_usd0pp.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_velocorev2_cpmm.PoolSimulator{})
 	msgpack.RegisterConcreteType(&pkg_liquiditysource_velocorev2_wombatstable.PoolSimulator{})
